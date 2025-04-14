@@ -1,9 +1,7 @@
-import 'package:calafi/components/button.dart';
-import 'package:calafi/components/footer/footer.dart';
-import 'package:calafi/components/headers/header.dart';
-import 'package:calafi/components/headers/nameHeader.dart';
-import 'package:calafi/components/headers/setHeader.dart';
+import 'package:calafi/config/app_color.dart';
+import 'package:calafi/screens/search.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 void main() {
   runApp(const MainApp());
@@ -14,17 +12,20 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Footer()
-          ],
-        )
+    return GetMaterialApp(
+      theme: ThemeData(
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: AppColor.gray700,
+            selectionColor: AppColor.gray300,
+            selectionHandleColor: AppColor.gray300
+          )
       ),
+      
+      debugShowCheckedModeBanner: false,
+      getPages: [
+        GetPage(name: '/Search', page: ()=> SearchPage())
+      ],
+      initialRoute: '/Search',
     );
   }
 }

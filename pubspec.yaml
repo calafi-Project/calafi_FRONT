@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.0.17
+  get: ^4.7.2
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +24,7 @@ flutter:
     - assets/
     - assets/font/
     - assets/icon/
+    - assets/icon/search/
     - assets/icon/footer/
     - assets/icon/footer/red/
     - assets/images/
