@@ -17,3 +17,28 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
+  assets:
+    - assets/
+    - assets/font/
+    - assets/icon/
+    - assets/icon/footer/
+    - assets/icon/footer/red/
+    - assets/images/
+
+  fonts:
+    - family: PretendardBold
+      fonts:
+        - asset: assets/font/Pretendard-Bold.otf
+    - family: PretendardSemiBold
+      fonts:
+        - asset: assets/font/Pretendard-SemiBold.otf
+    - family: PretendardRegular
+      fonts:
+        - asset: assets/font/Pretendard-Regular.otf
+    - family: PretendardLight
+      fonts:
+        - asset: assets/font/Pretendard-Light.otf
+    - family: PretendardMedium
+      fonts:
+        - asset: assets/font/Pretendard-Medium.otf
