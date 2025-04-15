@@ -1,27 +1,19 @@
-import 'package:calafi/components/search/search.dart';
-import 'package:calafi/components/search/tag.dart';
-import 'package:calafi/config/app_color.dart';
-import 'package:calafi/config/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:calafi/config/app_text_styles.dart';
+import 'package:calafi/components/search/widget/tag.dart';
+import 'package:calafi/config/app_color.dart';
 
-class SearchPage extends StatelessWidget {
-  final TextEditingController searchController = TextEditingController();
-  SearchPage({super.key});
+class Searching extends StatelessWidget {
+  const Searching({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Search(controller: searchController,),
-            SizedBox(height: 12,),
-
-            Padding(
+    return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
+                  SizedBox(height: 12,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -52,10 +44,6 @@ class SearchPage extends StatelessWidget {
                   )
                 ],
               ),
-            )
-          ],
-        ),
-      ),
-    );
+            );
   }
 }
