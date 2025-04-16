@@ -26,6 +26,7 @@ flutter:
     - assets/icon/
     - assets/icon/heart/
     - assets/icon/search/
+    - assets/icon/detail/
     - assets/icon/footer/
     - assets/icon/footer/red/
     - assets/images/
