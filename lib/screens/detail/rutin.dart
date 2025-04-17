@@ -89,7 +89,7 @@ class _RutinPageState extends State<RutinPage> {
                           ),
                           
                           SizedBox(
-                            height: 320,
+                            height: 400,
                             child: ListView(
                               children: [
                                 ExerciseVideo(isadd: false,image: 'assets/images/profile.png', detail: '킴펨베의 운동 교실', title: '킴펨베'),
@@ -106,7 +106,7 @@ class _RutinPageState extends State<RutinPage> {
                     ],
                   ),
                 ),
-                Footer()
+                Footer(isClick: 0,)
               ],
             ),
             Chat(chats: [['칼라피오리','이거 완전 대박이노','assets/images/profile.png'],['칼라피오리','이거 완전 대박이노','assets/images/profile.png']]),

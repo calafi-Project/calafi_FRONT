@@ -80,7 +80,7 @@ class _MemberPageState extends State<MemberPage> {
                       ],
                     ),
                   ):Obx(()=>SizedBox(
-                    height: 360,
+                    height: 400,
                     child: memberController.isSelector.value?ListView.builder(
                       itemCount: 131,
                       itemBuilder: (context, index) {
@@ -97,7 +97,7 @@ class _MemberPageState extends State<MemberPage> {
                 ],
               ),
             ),
-            Footer()
+            Footer(isClick: 0,)
           ],
         ),
       ),

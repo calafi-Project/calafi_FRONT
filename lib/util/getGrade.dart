@@ -1,5 +1,4 @@
-
-  String getGrade(int ind){
+String getGrade(int ind){
     if(ind==1){
       return "근육 빵빵오리";
     }

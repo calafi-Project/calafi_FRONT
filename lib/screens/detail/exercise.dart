@@ -77,9 +77,11 @@ class ExercisePage extends StatelessWidget {
                           ),
                       
                           SizedBox(
-                            height: 320,
+                            height: 400,
                             child: ListView(
                               children: [
+                                ExerciseVideo(isadd: true,image: 'assets/images/profile.png', detail: '킴펨베의 운동 교실', title: '킴펨베'),
+                                ExerciseVideo(isadd: true,image: 'assets/images/profile.png', detail: '킴펨베의 운동 교실', title: '킴펨베'),
                                 ExerciseVideo(isadd: true,image: 'assets/images/profile.png', detail: '킴펨베의 운동 교실', title: '킴펨베'),
                                 ExerciseVideo(isadd: true,image: 'assets/images/profile.png', detail: '킴펨베의 운동 교실', title: '킴펨베'),
                                 ExerciseVideo(isadd: true,image: 'assets/images/profile.png', detail: '킴펨베의 운동 교실', title: '킴펨베'),
@@ -93,7 +95,7 @@ class ExercisePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                Footer()
+                Footer(isClick: 0,)
               ],
             ),
             Chat(chats: [['칼라피오리','이거 완전 대박이노','assets/images/profile.png'],['칼라피오리','이거 완전 대박이노','assets/images/profile.png']]),
