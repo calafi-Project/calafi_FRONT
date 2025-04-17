@@ -38,7 +38,7 @@ class _SearchPageState extends State<SearchPage> {
                 ],
               ),
             ),
-            Footer()
+            Footer(isClick: 2,)
           ],
         ),
       ),

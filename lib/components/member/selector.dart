@@ -13,23 +13,25 @@ class MemberSelector extends StatefulWidget {
 
 class _MemberSelectorState extends State<MemberSelector> {
   final memberController = Get.find<MemberController>();
-
+  
   @override
   void initState() {
-    memberController.changeOpen();
     super.initState();
+    Future.delayed(Duration.zero, () {
+      memberController.isSelector.value = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Row(
         children: [
-          Obx(()=>          Expanded(
+          Expanded(
             child: GestureDetector(
               onTap: (){
                 memberController.changeOpen();
               },
-              child: Container(
+              child: Obx(()=>Container(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
                   color: AppColor.gray50,
@@ -40,15 +42,15 @@ class _MemberSelectorState extends State<MemberSelector> {
                     Text('루틴',style: memberController.isSelector.value?AppTextStyles.S16.copyWith( color: AppColor.gray900):AppTextStyles.M16.copyWith( color: AppColor.gray500),)
                   ],
                 ),
-              ),
+              ),)
             ),
-          ),),
-          Obx(()=>Expanded(
+          ),
+          Expanded(
             child: GestureDetector(
               onTap: (){
                 memberController.changeClose();
               },
-              child: Container(
+              child: Obx(()=>Container(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
                   color: AppColor.gray50,
@@ -59,9 +61,9 @@ class _MemberSelectorState extends State<MemberSelector> {
                     Text('운동',style: !memberController.isSelector.value?AppTextStyles.S16.copyWith( color: AppColor.gray900):AppTextStyles.M16.copyWith( color: AppColor.gray500),)
                   ],
                 ),
-              ),
+              ),)
             ),
-          ),)
+          ),
         ],
       );
   }

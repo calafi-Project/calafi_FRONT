@@ -9,9 +9,24 @@ import 'package:calafi/screens/search/searchevery.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Searched extends StatelessWidget {
+class Searched extends StatefulWidget {
+
+  const Searched({super.key});
+
+  @override
+  State<Searched> createState() => _SearchedState();
+}
+
+class _SearchedState extends State<Searched> {
   final searchController = Get.put(SeaController());
-  Searched({super.key});
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      searchController.changeClick(0);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

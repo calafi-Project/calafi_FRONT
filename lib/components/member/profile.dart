@@ -4,6 +4,7 @@ import 'package:calafi/config/app_text_styles.dart';
 import 'package:calafi/util/getGrade.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class MemberProfile extends StatelessWidget {
   final String name,image;
@@ -50,7 +51,12 @@ class MemberProfile extends StatelessWidget {
           children: [
             Text(getGrade(grade),style: AppTextStyles.R12.copyWith(color: AppColor.gray500),),
             SizedBox(width: 4,),
-            SvgPicture.asset('assets/icon/quest.svg')
+            GestureDetector(
+              onTap: (){
+                Get.toNamed('Rank');
+              },
+              child: SvgPicture.asset('assets/icon/quest.svg')
+            )
           ],
         )
       ],

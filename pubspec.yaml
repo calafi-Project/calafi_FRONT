@@ -24,12 +24,14 @@ flutter:
     - assets/
     - assets/font/
     - assets/icon/
+    - assets/icon/my/
     - assets/icon/heart/
     - assets/icon/search/
     - assets/icon/detail/
     - assets/icon/footer/
     - assets/icon/footer/red/
     - assets/images/
+    - assets/images/rank/
 
   fonts:
     - family: PretendardBold
