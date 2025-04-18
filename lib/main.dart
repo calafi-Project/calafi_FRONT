@@ -8,6 +8,7 @@ import 'package:calafi/screens/detail/exercise.dart';
 import 'package:calafi/screens/detail/member.dart';
 import 'package:calafi/screens/detail/rutin.dart';
 import 'package:calafi/screens/follow.dart';
+import 'package:calafi/screens/manage/manage.dart';
 import 'package:calafi/screens/my/info.dart';
 import 'package:calafi/screens/my/manage.dart';
 import 'package:calafi/screens/my/my.dart';
@@ -55,8 +56,9 @@ class MainApp extends StatelessWidget {
         GetPage(name: '/MyUpdate', page: ()=>MyUpdatePage()),
         GetPage(name: '/Rank', page: ()=>RankPage()),
         GetPage(name: '/MyManage', page: ()=>MyManagePage()),
+        GetPage(name: '/Manage', page: ()=>ManagePage()),
       ],
-      initialRoute: '/MyManage',
+      initialRoute: '/Manage',
     );
   }
 }
