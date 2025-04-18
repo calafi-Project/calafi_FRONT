@@ -51,6 +51,7 @@ class _FooterState extends State<Footer> {
           ),
           GestureDetector(
             onTap: (){
+              Get.toNamed('Manage');
             },
             child: Column(
               children: [

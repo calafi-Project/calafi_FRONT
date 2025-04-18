@@ -31,36 +31,45 @@ class _MyManagePageState extends State<MyManagePage> {
             Header(),
             MyManageSelector(),
             Expanded(child: Obx(()=>myManageController.isSelector.value?
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 18,),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text('게시된 루틴',style: AppTextStyles.M20.copyWith(color: AppColor.gray900),),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: 30,
-                    itemBuilder: (context, index) {
-                      return MyManageRuntin(isEvery: true,isadd: false,name: "칼라피오리",document: '등을 확실하게 조질 수 있습니다.',title: '개쩌는 등운동 루틴',image: 'assets/images/profile.png',);
-                    },
+            Expanded(
+              child: ListView(
+                children: [
+                  SizedBox(
+                    height: 600,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 18,),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Text('게시된 루틴',style: AppTextStyles.M20.copyWith(color: AppColor.gray900),),
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: 30,
+                            itemBuilder: (context, index) {
+                              return MyManageRuntin(isEvery: true,isadd: false,name: "칼라피오리",document: '등을 확실하게 조질 수 있습니다.',title: '개쩌는 등운동 루틴',image: 'assets/images/profile.png',);
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 16,),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Text('나의 루틴',style: AppTextStyles.M20.copyWith(color: AppColor.gray900),),
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: 30,
+                            itemBuilder: (context, index) {
+                              return MyManageRuntin(isEvery: true,isadd: true,name: "칼라피오리",document: '등을 확실하게 조질 수 있습니다.',title: '개쩌는 등운동 루틴',image: 'assets/images/profile.png',);
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(height: 16,),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Text('나의 루틴',style: AppTextStyles.M20.copyWith(color: AppColor.gray900),),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: 30,
-                    itemBuilder: (context, index) {
-                      return MyManageRuntin(isEvery: true,isadd: true,name: "칼라피오리",document: '등을 확실하게 조질 수 있습니다.',title: '개쩌는 등운동 루틴',image: 'assets/images/profile.png',);
-                    },
-                  ),
-                ),
-              ],
+                ],
+              ),
             )
             :
                         Column(
