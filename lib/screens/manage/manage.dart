@@ -21,6 +21,7 @@ class _ManagePageState extends State<ManagePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.white,
       body: SafeArea(
         child: Column(
           children: [
