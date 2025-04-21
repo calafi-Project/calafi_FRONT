@@ -1,5 +1,6 @@
 import 'package:calafi/config/app_color.dart';
 import 'package:calafi/provider/chat.dart';
+import 'package:calafi/provider/days/homeRutin.dart';
 import 'package:calafi/provider/footer.dart';
 import 'package:calafi/provider/selector/follow.dart';
 import 'package:calafi/provider/selector/manage.dart';
@@ -8,6 +9,9 @@ import 'package:calafi/screens/detail/exercise.dart';
 import 'package:calafi/screens/detail/member.dart';
 import 'package:calafi/screens/detail/rutin.dart';
 import 'package:calafi/screens/follow.dart';
+import 'package:calafi/screens/home/play.dart';
+import 'package:calafi/screens/home/report.dart';
+import 'package:calafi/screens/home/rutin.dart';
 import 'package:calafi/screens/manage/manage.dart';
 import 'package:calafi/screens/my/info.dart';
 import 'package:calafi/screens/my/manage.dart';
@@ -25,6 +29,7 @@ void main() {
   Get.put(MemberController());
   Get.put(FollowController());
   Get.put(MyManageController());
+  Get.put(HomeDayRutinController());
   runApp(MainApp());
 }
 
@@ -57,8 +62,11 @@ class MainApp extends StatelessWidget {
         GetPage(name: '/Rank', page: ()=>RankPage()),
         GetPage(name: '/MyManage', page: ()=>MyManagePage()),
         GetPage(name: '/Manage', page: ()=>ManagePage()),
+        GetPage(name: '/Report', page: ()=>ReportPage()),
+        GetPage(name: '/HomeRutin', page: ()=>HomeRutinPage()),
+        GetPage(name: '/Play', page: ()=>HomePlayPage()),
       ],
-      initialRoute: '/Manage',
+      initialRoute: '/Play',
     );
   }
 }
