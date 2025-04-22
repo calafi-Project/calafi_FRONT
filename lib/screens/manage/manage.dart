@@ -1,5 +1,5 @@
 import 'package:calafi/components/footer/footer.dart';
-import 'package:calafi/components/headers/header.dart';
+import 'package:calafi/components/headers/noHaeder.dart';
 import 'package:calafi/components/manage/days.dart';
 import 'package:calafi/components/my/manageRutin.dart';
 import 'package:calafi/config/app_color.dart';
@@ -25,7 +25,7 @@ class _ManagePageState extends State<ManagePage> {
       body: SafeArea(
         child: Column(
           children: [
-            Header(),
+            Nohaeder(),
             DaysManage(),
             Expanded(
               child: ListView(

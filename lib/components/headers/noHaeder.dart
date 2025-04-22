@@ -1,11 +1,10 @@
 import 'package:calafi/config/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
-class Header extends StatelessWidget {
+class Nohaeder extends StatelessWidget {
   final bool isAlram=false;
-  const Header({super.key});
+  const Nohaeder({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +14,8 @@ class Header extends StatelessWidget {
       ),
       padding: EdgeInsets.symmetric(horizontal: 20,vertical: 15),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          GestureDetector(
-            onTap: (){
-              Get.back();
-            },
-            child: SvgPicture.asset('assets/icon/back.svg')
-          ),
           isAlram?SvgPicture.asset('assets/icon/fullalram.svg'):SvgPicture.asset('assets/icon/alram.svg')
         ],
       ),
