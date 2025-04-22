@@ -26,6 +26,7 @@ class _WeightPageState extends State<WeightPage> {
         child: Column(
           children: [
             Header(),
+            SizedBox(height: 12,),
             Expanded(child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: ListView(

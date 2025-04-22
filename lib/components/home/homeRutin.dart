@@ -3,6 +3,7 @@ import 'package:calafi/config/app_color.dart';
 import 'package:calafi/config/app_text_styles.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class Homerutin extends StatefulWidget {
   final String image,name,title,document;
@@ -54,7 +55,7 @@ class _HomerutinState extends State<Homerutin> {
           ),
           GestureDetector(
             onTap: (){
-              
+              Get.toNamed('Play');
             },
             child: SvgPicture.asset('assets/icon/play.svg')
           )

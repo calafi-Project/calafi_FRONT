@@ -25,6 +25,7 @@ flutter:
     - assets/
     - assets/font/
     - assets/icon/
+    - assets/icon/week/
     - assets/icon/my/
     - assets/icon/heart/
     - assets/icon/search/

@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class ManageDaysController extends GetxController{
   RxList<bool> isClick = [true, false, false, false, false, false, false].obs;
-  RxString day = ''.obs;
+  RxString day = '월요일'.obs;
   void changeClick(int ind){
 
     for(int i=0;i<7;i++){
