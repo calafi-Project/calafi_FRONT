@@ -9,6 +9,7 @@ import 'package:calafi/screens/detail/exercise.dart';
 import 'package:calafi/screens/detail/member.dart';
 import 'package:calafi/screens/detail/rutin.dart';
 import 'package:calafi/screens/follow.dart';
+import 'package:calafi/screens/home/home.dart';
 import 'package:calafi/screens/home/play.dart';
 import 'package:calafi/screens/home/report.dart';
 import 'package:calafi/screens/home/rutin.dart';
@@ -67,8 +68,9 @@ class MainApp extends StatelessWidget {
         GetPage(name: '/HomeRutin', page: ()=>HomeRutinPage()),
         GetPage(name: '/Play', page: ()=>HomePlayPage()),
         GetPage(name: '/Weight', page: ()=>WeightPage()),
+        GetPage(name: '/Home', page: ()=>HomePage())
       ],
-      initialRoute: '/Weight',
+      initialRoute: '/Home',
     );
   }
 }

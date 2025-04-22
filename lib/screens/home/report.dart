@@ -40,9 +40,8 @@ class ReportPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 12,),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 12),
                     child: Container(
                       padding: EdgeInsets.all(12),
                       decoration: BoxDecoration(
