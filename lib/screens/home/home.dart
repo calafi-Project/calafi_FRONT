@@ -1,5 +1,5 @@
 import 'package:calafi/components/footer/footer.dart';
-import 'package:calafi/components/headers/header.dart';
+import 'package:calafi/components/headers/noHaeder.dart';
 import 'package:calafi/components/home/home/board.dart';
 import 'package:calafi/components/home/home/check.dart';
 import 'package:calafi/components/home/home/play.dart';
@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Column(
           children: [
-            Header(),
+            Nohaeder(),
             Expanded(
               child: ListView(
                 children: [
