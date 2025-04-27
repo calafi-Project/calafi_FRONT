@@ -15,8 +15,10 @@ class Footer extends StatefulWidget {
 class _FooterState extends State<Footer> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
+    bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
+
+    return !isKeyboardOpen? Container(
+      padding: EdgeInsets.symmetric(horizontal: 40,vertical: 6),
       decoration: BoxDecoration(
         color: AppColor.gray50,
         border: Border(top: BorderSide(color: AppColor.gray200,width: 1,))
@@ -32,7 +34,7 @@ class _FooterState extends State<Footer> {
             child: Column(
               children: [
                 SvgPicture.asset(widget.isClick==1?'assets/icon/footer/red/home.svg':'assets/icon/footer/home.svg'),
-                SizedBox(height: 6,),
+                SizedBox(height: 4,),
                 Text('홈',style: AppTextStyles.M14.copyWith(color: widget.isClick==1?AppColor.red:AppColor.gray400),)
               ],
             ),
@@ -44,7 +46,7 @@ class _FooterState extends State<Footer> {
             child: Column(
               children: [
                 SvgPicture.asset(widget.isClick==2?'assets/icon/footer/red/search.svg':'assets/icon/footer/search.svg'),
-                SizedBox(height: 6,),
+                SizedBox(height: 4,),
                 Text('검색',style: AppTextStyles.M14.copyWith(color: widget.isClick==2?AppColor.red:AppColor.gray400),)
               ],
             ),
@@ -56,7 +58,7 @@ class _FooterState extends State<Footer> {
             child: Column(
               children: [
                 SvgPicture.asset(widget.isClick==3?'assets/icon/footer/red/manage.svg':'assets/icon/footer/manage.svg'),
-                SizedBox(height: 6,),
+                SizedBox(height: 4,),
                 Text('관리',style: AppTextStyles.M14.copyWith(color: widget.isClick==3?AppColor.red:AppColor.gray400),)
               ],
             ),
@@ -84,13 +86,13 @@ class _FooterState extends State<Footer> {
                     ),
                   ),
                 ),
-                SizedBox(height: 6,),
+                SizedBox(height: 4,),
                 Text('MY',style: AppTextStyles.M14.copyWith(color: widget.isClick==4?AppColor.red:AppColor.gray400),),
               ],
             ),
           ),
         ],
       ),
-    );
+    ):SizedBox();
   }
 }
