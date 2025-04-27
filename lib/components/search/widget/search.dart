@@ -13,7 +13,7 @@ class Search extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColor.gray50,
       ),
-      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 6),
+      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 12),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(

@@ -15,7 +15,7 @@ class Timekcal extends StatelessWidget {
         color: AppColor.red,
       ),
       child: Wrap(
-        alignment: WrapAlignment.center,
+        alignment: WrapAlignment.spaceBetween,
         crossAxisAlignment: WrapCrossAlignment.center,
         spacing: 8,
         runSpacing: 8,

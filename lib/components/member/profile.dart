@@ -25,23 +25,28 @@ class MemberProfile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(name,style: AppTextStyles.S20.copyWith(color: AppColor.gray900),),
-                Row(
-                  children: [
-                    Text('팔로워',style: AppTextStyles.R12.copyWith(color: AppColor.gray400),),
-                    SizedBox(width: 4,),
-                    Text('$follower',style: AppTextStyles.M12.copyWith(color: AppColor.gray900),),
-                    Container(
-                      width: 4,
-                      height: 12,
-                      decoration: BoxDecoration(
-                        border: Border(right: BorderSide(color: AppColor.gray400,width: 1))
+                GestureDetector(
+                  onTap: (){
+                    Get.toNamed('Follow');
+                  },
+                  child: Row(
+                    children: [
+                      Text('팔로워',style: AppTextStyles.R12.copyWith(color: AppColor.gray400),),
+                      SizedBox(width: 4,),
+                      Text('$follower',style: AppTextStyles.M12.copyWith(color: AppColor.gray900),),
+                      Container(
+                        width: 4,
+                        height: 12,
+                        decoration: BoxDecoration(
+                          border: Border(right: BorderSide(color: AppColor.gray400,width: 1))
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 4,),
-                    Text('팔로잉',style: AppTextStyles.R12.copyWith(color: AppColor.gray400),),
-                    SizedBox(width: 4,),
-                    Text('$folling',style: AppTextStyles.M12.copyWith(color: AppColor.gray900),),
-                  ],
+                      SizedBox(width: 4,),
+                      Text('팔로잉',style: AppTextStyles.R12.copyWith(color: AppColor.gray400),),
+                      SizedBox(width: 4,),
+                      Text('$folling',style: AppTextStyles.M12.copyWith(color: AppColor.gray900),),
+                    ],
+                  ),
                 )
               ],
             ),
@@ -53,7 +58,7 @@ class MemberProfile extends StatelessWidget {
             SizedBox(width: 4,),
             GestureDetector(
               onTap: (){
-                Get.toNamed('Rank');
+                Get.toNamed('Rank',);
               },
               child: SvgPicture.asset('assets/icon/quest.svg')
             )
