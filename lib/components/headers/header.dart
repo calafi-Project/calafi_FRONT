@@ -23,7 +23,12 @@ class Header extends StatelessWidget {
             },
             child: SvgPicture.asset('assets/icon/back.svg')
           ),
-          isAlram?SvgPicture.asset('assets/icon/fullalram.svg'):SvgPicture.asset('assets/icon/alram.svg')
+          GestureDetector(
+            onTap: (){
+              Get.toNamed('Alram');
+            },
+            child: isAlram?SvgPicture.asset('assets/icon/fullalram.svg'):SvgPicture.asset('assets/icon/alram.svg')
+          )
         ],
       ),
     );

@@ -5,6 +5,7 @@ import 'package:calafi/provider/footer.dart';
 import 'package:calafi/provider/selector/follow.dart';
 import 'package:calafi/provider/selector/manage.dart';
 import 'package:calafi/provider/selector/member.dart';
+import 'package:calafi/screens/alram.dart';
 import 'package:calafi/screens/detail/exercise.dart';
 import 'package:calafi/screens/detail/member.dart';
 import 'package:calafi/screens/detail/rutin.dart';
@@ -68,7 +69,8 @@ class MainApp extends StatelessWidget {
         GetPage(name: '/HomeRutin', page: ()=>HomeRutinPage(),transition: Transition.noTransition),
         GetPage(name: '/Play', page: ()=>HomePlayPage(),transition: Transition.noTransition),
         GetPage(name: '/Weight', page: ()=>WeightPage(),transition: Transition.noTransition),
-        GetPage(name: '/Home', page: ()=>HomePage(),transition: Transition.noTransition)
+        GetPage(name: '/Home', page: ()=>HomePage(),transition: Transition.noTransition),
+        GetPage(name: '/Alram', page: ()=>AlramPage(),transition: Transition.noTransition),
       ],
       initialRoute: '/Home',
     );
