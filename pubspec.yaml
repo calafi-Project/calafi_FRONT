@@ -10,6 +10,7 @@ dependencies:
   fl_chart: ^0.71.0
   flutter:
     sdk: flutter
+  flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.0.17
   get: ^4.7.2
 
