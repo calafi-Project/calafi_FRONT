@@ -7,12 +7,14 @@ environment:
   sdk: ^3.7.2
 
 dependencies:
+  convert: ^3.1.2
   fl_chart: ^0.71.0
   flutter:
     sdk: flutter
   flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.0.17
   get: ^4.7.2
+  http: ^1.4.0
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +28,7 @@ flutter:
     - assets/
     - assets/font/
     - assets/icon/
+    - assets/icon/logo/
     - assets/icon/alram/
     - assets/icon/week/
     - assets/icon/my/

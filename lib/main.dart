@@ -1,10 +1,12 @@
 import 'package:calafi/config/app_color.dart';
+import 'package:calafi/provider/auth.dart';
 import 'package:calafi/provider/chat.dart';
 import 'package:calafi/provider/days/homeRutin.dart';
 import 'package:calafi/provider/footer.dart';
 import 'package:calafi/provider/selector/follow.dart';
 import 'package:calafi/provider/selector/manage.dart';
 import 'package:calafi/provider/selector/member.dart';
+import 'package:calafi/provider/sign.dart';
 import 'package:calafi/screens/alram.dart';
 import 'package:calafi/screens/detail/exercise.dart';
 import 'package:calafi/screens/detail/member.dart';
@@ -21,58 +23,86 @@ import 'package:calafi/screens/my/manage.dart';
 import 'package:calafi/screens/my/my.dart';
 import 'package:calafi/screens/my/set.dart';
 import 'package:calafi/screens/my/update.dart';
+import 'package:calafi/screens/onBoarding.dart';
 import 'package:calafi/screens/rank.dart';
 import 'package:calafi/screens/search/search.dart';
+import 'package:calafi/screens/login/login.dart';
+import 'package:calafi/screens/signup/age.dart';
+import 'package:calafi/screens/signup/email.dart';
+import 'package:calafi/screens/signup/height.dart';
+import 'package:calafi/screens/signup/name.dart';
+import 'package:calafi/screens/signup/password.dart';
+import 'package:calafi/screens/signup/signOk.dart';
+import 'package:calafi/screens/signup/weight.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // GetX 컨트롤러 등록
   Get.put(FooterController());
   Get.put(ChatController());
   Get.put(MemberController());
   Get.put(FollowController());
   Get.put(MyManageController());
   Get.put(HomeDayRutinController());
-  runApp(MainApp());
+  Get.put(SignController());
+  Get.put(AuthController());
+  // 토큰 체크
+  final storage = FlutterSecureStorage();
+  final token = await storage.read(key: 'accessToken');
+  final initial = token == null ? '/Onboarding' : '/Home';
+
+  runApp(MainApp(initialRoute: initial));
 }
 
 class MainApp extends StatelessWidget {
-
-  const MainApp({super.key});
+  final String initialRoute;
+  const MainApp({super.key, required this.initialRoute});
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
-          textSelectionTheme: TextSelectionThemeData(
-            cursorColor: AppColor.gray700,
-            selectionColor: AppColor.gray300,
-            selectionHandleColor: AppColor.gray300
-          )
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: AppColor.gray700,
+          selectionColor: AppColor.gray300,
+          selectionHandleColor: AppColor.gray300,
+        ),
       ),
-
       debugShowCheckedModeBanner: false,
+      initialRoute: initialRoute,
       getPages: [
-        GetPage(name: '/Search', page: ()=> SearchPage(),transition: Transition.noTransition),
-        GetPage(name: '/Exercise', page: ()=>ExercisePage(),transition: Transition.noTransition),
-        GetPage(name: '/Rutin', page: ()=>RutinPage(),transition: Transition.noTransition),
-        GetPage(name: '/Member', page: ()=>MemberPage(),transition: Transition.noTransition),
-        GetPage(name: '/Follow', page: ()=>FollowPage(),transition: Transition.noTransition),
-        GetPage(name: '/My', page: ()=>MyPage(),transition: Transition.noTransition),
-        GetPage(name: '/MySet', page: ()=>SetPage(),transition: Transition.noTransition),
-        GetPage(name: '/MyInfo', page: ()=>MyInfoPage(),transition: Transition.noTransition),
-        GetPage(name: '/MyUpdate', page: ()=>MyUpdatePage(),transition: Transition.noTransition),
-        GetPage(name: '/Rank', page: ()=>RankPage(),transition: Transition.noTransition),
-        GetPage(name: '/MyManage', page: ()=>MyManagePage(),transition: Transition.noTransition),
-        GetPage(name: '/Manage', page: ()=>ManagePage(),transition: Transition.noTransition),
-        GetPage(name: '/Report', page: ()=>ReportPage(),transition: Transition.noTransition),
-        GetPage(name: '/HomeRutin', page: ()=>HomeRutinPage(),transition: Transition.noTransition),
-        GetPage(name: '/Play', page: ()=>HomePlayPage(),transition: Transition.noTransition),
-        GetPage(name: '/Weight', page: ()=>WeightPage(),transition: Transition.noTransition),
-        GetPage(name: '/Home', page: ()=>HomePage(),transition: Transition.noTransition),
-        GetPage(name: '/Alram', page: ()=>AlramPage(),transition: Transition.noTransition),
+        GetPage(name: '/Search', page: () => SearchPage()),
+        GetPage(name: '/Exercise', page: () => ExercisePage()),
+        GetPage(name: '/Rutin', page: () => RutinPage()),
+        GetPage(name: '/Member', page: () => MemberPage()),
+        GetPage(name: '/Follow', page: () => FollowPage()),
+        GetPage(name: '/My', page: () => MyPage()),
+        GetPage(name: '/MySet', page: () => SetPage()),
+        GetPage(name: '/MyInfo', page: () => MyInfoPage()),
+        GetPage(name: '/MyUpdate', page: () => MyUpdatePage()),
+        GetPage(name: '/Rank', page: () => RankPage()),
+        GetPage(name: '/MyManage', page: () => MyManagePage()),
+        GetPage(name: '/Manage', page: () => ManagePage()),
+        GetPage(name: '/Report', page: () => ReportPage()),
+        GetPage(name: '/HomeRutin', page: () => HomeRutinPage()),
+        GetPage(name: '/Play', page: () => HomePlayPage()),
+        GetPage(name: '/Weight', page: () => WeightPage()),
+        GetPage(name: '/Home', page: () => HomePage()),
+        GetPage(name: '/Alram', page: () => AlramPage()),
+        GetPage(name: '/Login', page: () => LoginPage()),
+        GetPage(name: '/SignUpName', page: () => SignUpName()),
+        GetPage(name: '/SignUpAge', page: () => SignUpAge()),
+        GetPage(name: '/SignUpHeight', page: () => SignUpHeight()),
+        GetPage(name: '/SignUpEmail', page: () => SignUpEmail()),
+        GetPage(name: '/SignUpWeight', page: () => SignUpWeight()),
+        GetPage(name: '/SignUpPassword', page: () => SignUpPassword()),
+        GetPage(name: '/Onboarding', page: () => Onboarding()),
+        GetPage(name: '/SignUpOk', page: () => SignUpOk()),
       ],
-      initialRoute: '/Home',
     );
   }
 }
