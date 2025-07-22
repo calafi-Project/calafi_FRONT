@@ -6,6 +6,7 @@ import 'package:calafi/components/my/select.dart';
 import 'package:calafi/config/app_color.dart';
 import 'package:calafi/config/app_text_styles.dart';
 import 'package:calafi/provider/selector/manage.dart';
+import 'package:calafi/provider/token.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,6 +19,8 @@ class MyManagePage extends StatefulWidget {
 
 class _MyManagePageState extends State<MyManagePage> {
   final myManageController = Get.find<MyManageController>();
+  final tokencontroller = Get.find<TokenController>();
+
   @override
 
   @override
@@ -47,7 +50,7 @@ class _MyManagePageState extends State<MyManagePage> {
                         child: ListView.builder(
                           itemCount: 30,
                           itemBuilder: (context, index) {
-                            return MyManageRuntin(isEvery: true,isadd: false,name: "칼라피오리",document: '등을 확실하게 조질 수 있습니다.',title: '개쩌는 등운동 루틴',image: 'assets/images/profile.png',);
+                            return MyManageRuntin(token: tokencontroller.accessToken.value, id: 1, isEvery: true,isadd: false,name: "칼라피오리",document: '등을 확실하게 조질 수 있습니다.',title: '개쩌는 등운동 루틴',image: 'assets/images/profile.png',);
                           },
                         ),
                       ),
@@ -60,7 +63,7 @@ class _MyManagePageState extends State<MyManagePage> {
                         child: ListView.builder(
                           itemCount: 30,
                           itemBuilder: (context, index) {
-                            return MyManageRuntin(isEvery: true,isadd: true,name: "칼라피오리",document: '등을 확실하게 조질 수 있습니다.',title: '개쩌는 등운동 루틴',image: 'assets/images/profile.png',);
+                            return MyManageRuntin(token: tokencontroller.accessToken.value, id: 1, isEvery: true,isadd: true,name: "칼라피오리",document: '등을 확실하게 조질 수 있습니다.',title: '개쩌는 등운동 루틴',image: 'assets/images/profile.png',);
                           },
                         ),
                       ),

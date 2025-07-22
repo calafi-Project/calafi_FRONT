@@ -1,8 +1,10 @@
 import 'package:calafi/components/home/home/waterInput.dart';
 import 'package:calafi/config/app_color.dart';
 import 'package:calafi/config/app_text_styles.dart';
+import 'package:calafi/provider/db/waterController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class Water extends StatefulWidget {
   final int hope, now;
@@ -16,6 +18,7 @@ class _WaterState extends State<Water> {
   bool isSetting = false;
   final cupController = TextEditingController();
   final hopeController = TextEditingController();
+  final waterController = Get.find<WaterController>();
 
   Widget _buildSettingView() {
     return Column(
@@ -30,7 +33,10 @@ class _WaterState extends State<Water> {
         ),
         SizedBox(height: 8),
         GestureDetector(
-          onTap: () => setState(() => isSetting = false),
+          onTap: () async{
+            setState(() => isSetting = false);
+            await waterController.updateGoalStep(int.parse(hopeController.text), int.parse(cupController.text));
+          },
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 4),
             decoration: BoxDecoration(
@@ -45,37 +51,43 @@ class _WaterState extends State<Water> {
   }
 
   Widget _buildDisplayView() {
-    return GestureDetector(
-      onTap: () => setState(() => isSetting = true),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  SvgPicture.asset('assets/icon/week/cup.svg'),
-                  SizedBox(width: 4),
-                  Text('${widget.now}ml ', style: AppTextStyles.M16.copyWith(color: AppColor.gray900)),
-                  Text('/', style: AppTextStyles.R16.copyWith(color: AppColor.gray500)),
-                  Text('${widget.hope}ml', style: AppTextStyles.R14.copyWith(color: AppColor.gray500)),
-                ],
-              ),
-              SizedBox(height: 12),
-              Container(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                SvgPicture.asset('assets/icon/week/cup.svg'),
+                SizedBox(width: 4),
+                Text('${widget.now}ml ', style: AppTextStyles.M16.copyWith(color: AppColor.gray900)),
+                Text('/', style: AppTextStyles.R16.copyWith(color: AppColor.gray500)),
+                Text('${widget.hope}ml', style: AppTextStyles.R14.copyWith(color: AppColor.gray500)),
+              ],
+            ),
+            SizedBox(height: 12),
+            GestureDetector(
+              onTap: ()async{
+                await waterController.addWater();
+              },
+              child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 14, vertical: 4),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(100),
                   color: AppColor.red,
                 ),
-                child: Text('+ 120ml', style: AppTextStyles.M16.copyWith(color: AppColor.white)),
+                child: Text('+ ${waterController.waterData.value!.step}ml', style: AppTextStyles.M16.copyWith(color: AppColor.white)),
               ),
-            ],
-          ),
-          SvgPicture.asset('assets/icon/week/water.svg'),
-        ],
-      ),
+            ),
+          ],
+        ),
+        GestureDetector(
+          onTap: (){
+            setState(() => isSetting = true);
+          },
+          child: SvgPicture.asset('assets/icon/week/water.svg')),
+      ],
     );
   }
 

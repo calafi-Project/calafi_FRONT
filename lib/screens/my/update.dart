@@ -1,10 +1,14 @@
+import 'package:calafi/api/profile/myupdate.dart';
 import 'package:calafi/components/button.dart';
 import 'package:calafi/components/footer/footer.dart';
 import 'package:calafi/components/headers/header.dart';
 import 'package:calafi/components/my/inputUpdate.dart';
 import 'package:calafi/components/my/profile.dart';
 import 'package:calafi/config/app_color.dart';
+import 'package:calafi/provider/token.dart';
+import 'package:calafi/provider/user.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyUpdatePage extends StatefulWidget {
 
@@ -14,6 +18,8 @@ class MyUpdatePage extends StatefulWidget {
   State<MyUpdatePage> createState() => _MyUpdatePageState();
 }
 class _MyUpdatePageState extends State<MyUpdatePage> {
+  final tokenController = Get.find<TokenController>();
+  final userController = Get.find<UserController>();
   final TextEditingController weightController = TextEditingController();
   final TextEditingController heightController = TextEditingController();
 
@@ -82,7 +88,23 @@ class _MyUpdatePageState extends State<MyUpdatePage> {
                       ],
                     ),
                     SizedBox(height: 24),
-                    Button(state: !isEmpty, text: '완료'),
+                    GestureDetector(
+                      onTap: () async{
+                        if(!isEmpty){
+                          try{
+                            final myupdate = MyupdateApi(height: int.parse(heightController.text) ,weight:int.parse(weightController.text) ,token: tokenController.accessToken.value);
+                            await myupdate.MyupdateApi_post();
+                            userController.height.value=int.parse( heightController.text);
+                            userController.weight.value=int.parse( weightController.text);
+                            Get.toNamed('MyInfo');
+                          }catch(error){
+                            print(error);
+                          }
+                          
+                        }
+                      },
+                      child: Button(state: !isEmpty, text: '완료')
+                    ),
                   ],
                 ),
               ),

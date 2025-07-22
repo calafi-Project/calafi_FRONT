@@ -4,7 +4,9 @@ import 'package:calafi/components/my/gray.dart';
 import 'package:calafi/components/my/profile.dart';
 import 'package:calafi/config/app_color.dart';
 import 'package:calafi/config/app_text_styles.dart';
+import 'package:calafi/provider/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 class SetPage extends StatefulWidget {
@@ -15,6 +17,9 @@ class SetPage extends StatefulWidget {
 }
 
 class _SetPageState extends State<SetPage> {
+  final storage = FlutterSecureStorage();
+  final userController = Get.find<UserController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,8 +64,8 @@ class _SetPageState extends State<SetPage> {
                               ],
                             ),
                             SizedBox(height: 14),
-                            GrayButton(isOn: true, text: '루틴'),
-                            GrayButton(isOn: true, text: '운동'),
+                            GrayButton(isWork: userController.isRoutine.value,isOn: true, text: '루틴'),
+                            GrayButton(isWork: userController.isWorkout.value,isOn: true, text: '운동'),
                           ],
                         )
                       ],
@@ -70,7 +75,14 @@ class _SetPageState extends State<SetPage> {
                 ),
               ),
             ),
-
+            GestureDetector(
+              onTap: (){
+                storage.delete;
+                Get.toNamed('/Onboarding');
+              },
+              child: Text('로그아웃',style: AppTextStyles.B16.copyWith(color: AppColor.red),)
+            ),
+            SizedBox(height: 20,),
             Footer(isClick: 4)
           ],
         ),

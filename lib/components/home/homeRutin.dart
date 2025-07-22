@@ -8,7 +8,8 @@ import 'package:get/get.dart';
 class Homerutin extends StatefulWidget {
   final String image,name,title,document;
   final bool isEvery;
-  const Homerutin({required this.isEvery,required this.document,required this.image, required this.name , required this.title,super.key});
+  final int id;
+  const Homerutin({required this.id,required this.isEvery,required this.document,required this.image, required this.name , required this.title,super.key});
 
   @override
   State<Homerutin> createState() => _HomerutinState();
@@ -55,7 +56,7 @@ class _HomerutinState extends State<Homerutin> {
           ),
           GestureDetector(
             onTap: (){
-              Get.toNamed('Play');
+              Get.toNamed('Play',parameters: {'id':'${widget.id}'});
             },
             child: SvgPicture.asset('assets/icon/play.svg')
           )

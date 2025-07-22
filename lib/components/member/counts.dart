@@ -3,7 +3,10 @@ import 'package:calafi/config/app_color.dart';
 import 'package:flutter/material.dart';
 
 class MemberCount extends StatelessWidget {
-  const MemberCount({super.key});
+  final int workTime;
+  final int compleRoutine;
+  final int calori;
+  const MemberCount({required this.calori,required this.compleRoutine,required this.workTime,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class MemberCount extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          MemberText(text: '1h 24m', title: '운동한 시간'),
+          MemberText(text: '$workTime', title: '운동한 시간'),
           Container(
             width: 1,
             height: 16,
@@ -24,7 +27,7 @@ class MemberCount extends StatelessWidget {
               color: AppColor.blue
             ),
           ),
-          MemberText(text: '8개', title: '완료한 루틴'),
+          MemberText(text: '$compleRoutine개', title: '완료한 루틴'),
           Container(
             width: 1,
             height: 16,
@@ -32,7 +35,7 @@ class MemberCount extends StatelessWidget {
               color: AppColor.blue
             ),
           ),
-          MemberText(text: '12023', title: '소모 칼로리'),
+          MemberText(text: '$calori', title: '소모 칼로리'),
         ],
       ),
     );

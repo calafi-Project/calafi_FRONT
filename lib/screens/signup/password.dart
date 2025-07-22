@@ -64,11 +64,11 @@ class _SignUpPasswordState extends State<SignUpPassword> {
                       setState(() {
                         isOk = passwordController.text == repasswordController.text;
                       });
-
+          
                       if (isOk) {
                         if (passwordController.text.isNotEmpty) {
                           signController.password.value = passwordController.text;
-
+          
                           sign = Signupapi(
                             age: signController.age.value,
                             height: signController.height.value,
@@ -77,7 +77,7 @@ class _SignUpPasswordState extends State<SignUpPassword> {
                             weight: signController.weight.value,
                             email: signController.email.value,
                           );
-
+          
                           result=await sign.Signup_post();
                           if(result){
                             Get.toNamed('/SignUpOk');

@@ -3,33 +3,81 @@ import 'package:calafi/components/search/members.dart';
 import 'package:calafi/components/search/rutin.dart';
 import 'package:calafi/components/search/widget/Title.dart';
 import 'package:calafi/components/search/widget/more.dart';
-import 'package:flutter/widgets.dart';
+import 'package:calafi/provider/sear.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+// import 'package:calafi/components/search/exercise.dart';
+// import 'package:calafi/components/search/members.dart';
+// import 'package:calafi/components/search/rutin.dart';
+// import 'package:calafi/components/search/widget/Title.dart';
+// import 'package:calafi/components/search/widget/more.dart';
+// import 'package:calafi/provider/sear.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
 
 class Searchevery extends StatelessWidget {
-
-  const Searchevery({super.key});
+  final String token;
+  const Searchevery({required this.token, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        SearchTitle(text: '운동',),
-        SizedBox(height: 8,),
-        Exercise(exerciseName: '덤벨 컬',exerciseTool: ['덤벨','벨트'],isHeart: false,),
-        Exercise(exerciseName: '덤벨 컬',exerciseTool: ['덤벨','벨트'],isHeart: false,),
-        SizedBox(height: 4,),
-        SearchMore(selector: 1),
-        
-        SearchTitle(text: '루틴'),
-        Rutin(isEvery: false,title: '개쩌는 등 운동 루틴',heartCount: 2122,document: '등을 확실하게 조질 수 있습니다.',isHeart: false,name: "칼라피오리",image: 'assets/images/profile.png',),
-        Rutin(isEvery: false,title: '개쩌는 등 운동 루틴',heartCount: 2122,document: '등을 확실하게 조질 수 있습니다.',isHeart: false,name: "칼라피오리",image: 'assets/images/profile.png',),
-        SearchMore(selector: 2),
+    final resultController = Get.find<SearchModelController>();
 
-        SearchTitle(text: '회원'),
-        Members(grade: 1,isFollow: false,name: "칼라피오리",images: 'assets/images/profile.png',),
-        Members(grade: 1,isFollow: false,name: "칼라피오리",images: 'assets/images/profile.png',),
-        SearchMore(selector: 3),
-      ],
-    );
+    return Obx(() {
+      final data = resultController.result.value;
+      if (data == null) return SizedBox();
+
+      return ListView(
+        children: [
+          // 운동
+          if (data.exercises.length >= 1) ...[
+            SearchTitle(text: '운동'),
+            const SizedBox(height: 8),
+            ...data.exercises.take(2).map((exercise) => Exercise(
+              id: exercise.id,
+              imageurl: exercise.imageUrl ?? 'assets/images/exer.jpg',
+              exerciseName: exercise.name,
+              exerciseTool: exercise.need.split(','),
+              isHeart: exercise.isHeart,
+            )),
+            const SizedBox(height: 4),
+            SearchMore(selector: 1),
+          ],
+
+          // 루틴
+          if (data.routines.length >= 1) ...[
+            SearchTitle(text: '루틴'),
+            ...data.routines.take(2).map((routine) => Rutin(
+              isMy: false,
+              id: routine.id,
+              token: token,
+              isEvery: false,
+              title: routine.name,
+              heartCount: routine.likes,
+              document: routine.description,
+              isHeart: routine.isHeart,
+              name: routine.authorName,
+              image: routine.authorProfile ?? 'assets/images/user.png',
+            )),
+            SearchMore(selector: 2),
+          ],
+
+          // 회원
+          if (data.users.length >= 1) ...[
+            SearchTitle(text: '회원'),
+            ...data.users.take(2).map((user) => Members(
+              isMy: false,
+              token: token,
+              id: user.id,
+              grade: user.grade,
+              isFollow: user.isFollow,
+              name: user.name,
+              images: user.profileImage ?? 'assets/images/user.png',
+            )),
+            SearchMore(selector: 3),
+          ],
+        ],
+      );
+    });
   }
 }

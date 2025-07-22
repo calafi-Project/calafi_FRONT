@@ -20,7 +20,7 @@ class Profile extends StatelessWidget {
       ),
       child: ClipOval(
         child: Image.asset(
-          image,
+          image=="null"?'assets/images/user.png':image,
           fit: BoxFit.cover,
         ),
       ),

@@ -9,8 +9,10 @@ import 'package:get/get.dart';
 class MemberProfile extends StatelessWidget {
   final String name,image;
   final int follower,folling,grade;
+  final int id;
+  final bool isMy;
 
-  const MemberProfile({required this.folling,required this.follower,required this.grade,required this.image,required this.name,super.key});
+  const MemberProfile({required this.isMy, required this.id,required this.folling,required this.follower,required this.grade,required this.image,required this.name,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class MemberProfile extends StatelessWidget {
                 Text(name,style: AppTextStyles.S20.copyWith(color: AppColor.gray900),),
                 GestureDetector(
                   onTap: (){
-                    Get.toNamed('Follow');
+                    Get.toNamed('Follow',parameters: {'id':'$id','isMy':'$isMy'});
                   },
                   child: Row(
                     children: [

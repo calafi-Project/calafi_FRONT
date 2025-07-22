@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 class ExercisevideoDelete extends StatelessWidget {
   final String image,title,detail;
-  const ExercisevideoDelete({required this.image,required this.detail,required this.title,super.key});
+  final int id;
+  const ExercisevideoDelete({required this.id,required this.image,required this.detail,required this.title,super.key});
 
   @override
   Widget build(BuildContext context) {

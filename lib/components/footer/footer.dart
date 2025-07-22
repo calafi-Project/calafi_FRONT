@@ -1,5 +1,6 @@
 import 'package:calafi/config/app_color.dart';
 import 'package:calafi/config/app_text_styles.dart';
+import 'package:calafi/provider/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ class Footer extends StatefulWidget {
 }
 
 class _FooterState extends State<Footer> {
+  final userController = Get.find<UserController>();
   @override
   Widget build(BuildContext context) {
     bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
@@ -81,7 +83,7 @@ class _FooterState extends State<Footer> {
                   ),
                   child: ClipOval(
                     child: Image.asset(
-                      'assets/images/profile.png',
+                      "${userController.profileImage.value}"=="null"?'assets/images/user.png':'${userController.profileImage.value}',
                       fit: BoxFit.cover,
                     ),
                   ),

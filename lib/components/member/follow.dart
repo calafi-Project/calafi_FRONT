@@ -43,12 +43,12 @@ String grade='';
               ),
             ],
           ),
-          GestureDetector(
-            onTap: (){
+          // GestureDetector(
+          //   onTap: (){
               
-            },
-            child: Text('삭제',style: AppTextStyles.M14.copyWith(color: AppColor.red),)
-          )
+          //   },
+          //   child: Text('삭제',style: AppTextStyles.M14.copyWith(color: AppColor.red),)
+          // )
         ],
       ),
     );

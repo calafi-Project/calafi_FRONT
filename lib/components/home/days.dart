@@ -1,8 +1,6 @@
 import 'package:calafi/components/home/day.dart';
 import 'package:calafi/config/app_color.dart';
-import 'package:calafi/provider/days/homeRutin.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class DaysHome extends StatefulWidget {
   const DaysHome({super.key});
@@ -12,8 +10,7 @@ class DaysHome extends StatefulWidget {
 }
 
 class _DaysHomeState extends State<DaysHome> {
-  final homeRutinController = Get.find<HomeDayRutinController>();
-
+  
   @override
   Widget build(BuildContext context) {
     return Container(

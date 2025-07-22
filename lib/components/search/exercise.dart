@@ -2,14 +2,16 @@ import 'package:calafi/components/profile.dart';
 import 'package:calafi/config/app_color.dart';
 import 'package:calafi/config/app_text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class Exercise extends StatefulWidget {
   final bool isHeart;
   final String exerciseName;
   final List<String> exerciseTool;
-  const Exercise({required this.exerciseName,required this.exerciseTool, required this.isHeart,super.key});
+  final int id;
+  final String imageurl;
+  const Exercise({required this.id,required this.imageurl,required this.exerciseName,required this.exerciseTool, required this.isHeart,super.key});
 
   @override
   State<Exercise> createState() => _ExerciseState();
@@ -28,7 +30,7 @@ class _ExerciseState extends State<Exercise> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Get.toNamed('Exercise');
+        Get.toNamed('Exercise',parameters: {'id': '${widget.id}'});
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20,vertical: 8),
@@ -38,7 +40,7 @@ class _ExerciseState extends State<Exercise> {
           children: [
             Row(
               children: [
-                Profile(image: "assets/images/profile.png", size: 48),
+                Profile(image: widget.imageurl, size: 48),
                 SizedBox(width: 14,),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,14 +67,14 @@ class _ExerciseState extends State<Exercise> {
               ],
             ),
       
-            GestureDetector(
-              onTap: (){
-                setState(() {
-                  isHeart=!isHeart;
-                });
-              },
-              child: isHeart?SvgPicture.asset('assets/icon/heart/full.svg'):SvgPicture.asset('assets/icon/heart/empty.svg')
-            ),
+            // GestureDetector(
+            //   onTap: (){
+            //     setState(() {
+            //       isHeart=!isHeart;
+            //     });
+            //   },
+            //   child: isHeart?SvgPicture.asset('assets/icon/heart/full.svg'):SvgPicture.asset('assets/icon/heart/empty.svg')
+            // ),
           ],
         ),
       ),
