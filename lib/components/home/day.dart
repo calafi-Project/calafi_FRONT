@@ -1,6 +1,7 @@
 import 'package:calafi/config/app_color.dart';
 import 'package:calafi/config/app_text_styles.dart';
 import 'package:calafi/provider/days/homeRutin.dart';
+import 'package:calafi/provider/weekRoutine.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,12 +16,14 @@ class DayHome extends StatefulWidget {
 
 class _DayHomeState extends State<DayHome> {
   final homeRutinController = Get.find<HomeDayRutinController>();
+  final weekController = Get.find<WeekroutineController>();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: ()async{
         homeRutinController.changeClick(widget.isClick);
+        await weekController.weekapi(homeRutinController.GetClick());
       },
       child: Obx(()=>Container(
         padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),

@@ -6,6 +6,7 @@ import 'package:calafi/config/app_color.dart';
 import 'package:calafi/config/app_text_styles.dart';
 import 'package:calafi/models/accessToken.dart';
 import 'package:calafi/provider/auth.dart';
+import 'package:calafi/provider/token.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -54,6 +55,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final tokenController = Get.find<TokenController>();
+
     return Scaffold(
       backgroundColor: AppColor.white,
       body: SafeArea(
@@ -85,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                    Column(
                      children: [
                       isOk?SizedBox():Text('맞는 이메일과 비밀번호가 존재 하지 않습니다.',style: AppTextStyles.R12.copyWith(color: AppColor.red),),
-
+              
                       SizedBox(height: 30,),
                        isEmpty?
                        GestureDetector(
@@ -94,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                           result = await login.Login_post();
                           if(result.accessToken.isNotEmpty){
                             await authController.saveToken(result.accessToken);
+                            tokenController.accessToken.value = result.accessToken;
                             Get.toNamed('/Home');
                           }
                         },

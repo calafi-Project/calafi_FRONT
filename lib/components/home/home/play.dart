@@ -1,5 +1,8 @@
+// import 'dart:ffi';
+
 import 'package:calafi/config/app_color.dart';
 import 'package:calafi/config/app_text_styles.dart';
+import 'package:calafi/provider/routineComplete.dart';
 import 'package:calafi/widgets/wave.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,7 +19,8 @@ class HomePlay extends StatefulWidget {
 class _HomePlayState extends State<HomePlay> with SingleTickerProviderStateMixin{
 
   late AnimationController animationController;
-
+  
+  final routinecomplete = Get.find<Routinecomplete>();
   bool isCompolite=false;
 
   @override
@@ -56,7 +60,7 @@ class _HomePlayState extends State<HomePlay> with SingleTickerProviderStateMixin
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('개쩌는 운동 루틴',style: AppTextStyles.S18.copyWith(color: AppColor.gray900),),
+            Text('오늘의 루틴을 완성하세요',style: AppTextStyles.S18.copyWith(color: AppColor.gray900),),
             Text('성공을 향한 빌드업으로 오늘의 목표를 달성하세요',style: AppTextStyles.M12.copyWith(color: AppColor.gray400),),
             SizedBox(height: 18,),
             Row(
@@ -65,26 +69,27 @@ class _HomePlayState extends State<HomePlay> with SingleTickerProviderStateMixin
                   child: Stack(
                     alignment: Alignment.center, // 중앙 정렬
                     children: [
-                      WaveWidget(
+                      Obx(()=>WaveWidget(
                         animation: animationController,
                         size: 100,
                         amplitude: 10,
-                        position: 45,
+                        position: 100-routinecomplete.percent.value.toDouble(),
                         color: AppColor.red,
                         style: WaveStyle.sin,
-                      ),
-                      WaveWidget(
+                      ),),
+                      Obx(()=>WaveWidget(
                         animation: animationController,
                         size: 100,
                         amplitude: 15,
-                        position: 45,
+                        position:100-routinecomplete.percent.value.toDouble(),
+
                         color: AppColor.red.withOpacity(0.5),
                         style: WaveStyle.cos,
-                      ),
-                      Text(
-                        '48%',
+                      ),),
+                      Obx(()=>Text(
+                        '${routinecomplete.percent.value}%',
                         style: AppTextStyles.B30.copyWith(color: AppColor.gray900),
-                      ),
+                      ),)
                     ],
                   ),
                 ),
@@ -104,7 +109,7 @@ class _HomePlayState extends State<HomePlay> with SingleTickerProviderStateMixin
                           color: AppColor.gray200,
                           borderRadius: BorderRadius.circular(100)
                         ),
-                        child: Text(isCompolite?'달성하셨습니다!':'3일 연속',style: AppTextStyles.M12.copyWith(color: AppColor.gray900),),
+                        child: Text(isCompolite?'달성하셨습니다!':'0일 연속',style: AppTextStyles.M12.copyWith(color: AppColor.gray900),),
                       )
                     ],
                   ),

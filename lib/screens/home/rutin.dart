@@ -5,6 +5,7 @@ import 'package:calafi/components/home/homeRutin.dart';
 import 'package:calafi/config/app_color.dart';
 import 'package:calafi/config/app_text_styles.dart';
 import 'package:calafi/provider/days/homeRutin.dart';
+import 'package:calafi/provider/weekRoutine.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,22 @@ class HomeRutinPage extends StatefulWidget {
 
 class _HomeRutinPageState extends State<HomeRutinPage> {
   final homeRutinController = Get.find<HomeDayRutinController>();
+  final weekController = Get.find<WeekroutineController>();
+
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getWeek();
+  }
+
+  void getWeek() async {
+    setState(() => isLoading = true);
+
+    await weekController.weekapi(homeRutinController.GetClick());
+    setState(() => isLoading = false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +58,27 @@ class _HomeRutinPageState extends State<HomeRutinPage> {
                           child: Obx(()=>Text('${homeRutinController.day} 루틴',style: AppTextStyles.S18.copyWith(color: AppColor.gray900),)),
                         ),
                         Expanded(
-                          child: ListView.builder(
-                            itemCount: 30,
-                            itemBuilder: (context, index) {
-                              return Homerutin(isEvery: true,name: "칼라피오리",document: '등을 확실하게 조질 수 있습니다.',title: '개쩌는 등운동 루틴',image: 'assets/images/profile.png',);
-                            },
-                          ),
+                          child: isLoading
+                              ? const Center(child: CircularProgressIndicator())
+                              : Obx(() {
+                                  final data = weekController.getFollowingData;
+                                  return ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    itemCount: data.length,
+                                    itemBuilder: (context, index) {
+                                      final routine = data[index];
+                                      return Homerutin(
+                                        id: routine.id,
+                                        isEvery: true,
+                                        name: routine.authorName,
+                                        document: routine.description,
+                                        title: routine.name,
+                                        image: routine.authorProfile,
+                                      );
+                                    },
+                                  );
+                                }),
                         ),
                       ],
                     ),

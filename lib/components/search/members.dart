@@ -7,10 +7,12 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class Members extends StatefulWidget {
-  final String name,images;
+  final String name,images,token;
   final int grade;
   final bool isFollow;
-  const Members({required this.images,required this.grade,required this.isFollow,required this.name,super.key});
+  final bool isMy;
+  final int id;
+  const Members({required this.isMy,required this.token,required this.id,required this.images,required this.grade,required this.isFollow,required this.name,super.key});
 
   @override
   State<Members> createState() => _MembersState();
@@ -18,7 +20,7 @@ class Members extends StatefulWidget {
 
 class _MembersState extends State<Members> {
   String grade='';
-
+  
   @override
   void initState() {
     grade = getGrade(widget.grade);
@@ -29,7 +31,7 @@ class _MembersState extends State<Members> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Get.toNamed('Member');
+        Get.toNamed('Member',parameters: {'id':'${widget.id}','isfollow':'${widget.isFollow}'});
       },
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 8,horizontal: 20),
@@ -49,7 +51,7 @@ class _MembersState extends State<Members> {
                 ),
               ],
             ),
-            FollowButton(isFollow: widget.isFollow)
+            FollowButton(isMy: widget.isMy,isFollow: widget.isFollow,id: widget.id,token: widget.token,)
           ],
         ),
       ),

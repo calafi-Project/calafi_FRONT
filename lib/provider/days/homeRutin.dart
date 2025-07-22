@@ -33,4 +33,30 @@ class HomeDayRutinController extends GetxController{
 
     isClick[ind]=true;
   }
+
+  int GetClick(){
+    if(isClick[0]==true){
+      return 1;
+    }
+    else if(isClick[1]==true){
+      return 2;
+    }
+    else if(isClick[2]==true){
+      return 3;
+    }
+    else if(isClick[3]==true){
+      return 4;
+    }
+    else if(isClick[4]==true){
+      return 5;
+    }
+    else if(isClick[5]==true){
+      return 6;
+    }
+    else if(isClick[6]==true){
+      return 7;
+    }
+
+    return 0;
+  }
 }

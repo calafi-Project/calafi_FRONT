@@ -17,12 +17,12 @@ class Nohaeder extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          GestureDetector(
-            onTap: (){
-              Get.toNamed('Alram');
-            },
-            child: isAlram?SvgPicture.asset('assets/icon/fullalram.svg'):SvgPicture.asset('assets/icon/alram.svg')
-          )
+          // GestureDetector(
+          //   onTap: (){
+          //     Get.toNamed('Alram');
+          //   },
+          //   child: isAlram?SvgPicture.asset('assets/icon/fullalram.svg'):SvgPicture.asset('assets/icon/alram.svg')
+          // )
         ],
       ),
     );

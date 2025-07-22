@@ -1,3 +1,4 @@
+import 'package:calafi/api/user/createExerciseRoutine.dart';
 import 'package:calafi/components/footer/footer.dart';
 import 'package:calafi/components/headers/setHeader.dart';
 import 'package:calafi/components/member/counts.dart';
@@ -6,14 +7,45 @@ import 'package:calafi/components/member/selector.dart';
 import 'package:calafi/components/my/exerciseVideo.dart';
 import 'package:calafi/components/my/rutin.dart';
 import 'package:calafi/config/app_color.dart';
+import 'package:calafi/models/user/getCreate.dart';
+import 'package:calafi/provider/profile.dart';
 import 'package:calafi/provider/selector/member.dart';
+import 'package:calafi/provider/token.dart';
+import 'package:calafi/provider/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class MyPage extends StatelessWidget {
+class MyPage extends StatefulWidget {
+
+  const MyPage({super.key});
+
+  @override
+  State<MyPage> createState() => _MyPageState();
+}class _MyPageState extends State<MyPage> {
+  final userController = Get.find<UserController>();
   final memberController = Get.find<MemberController>();
-  MyPage({super.key});
+  final tokenController = Get.find<TokenController>();
+  final poriflecontroller = Get.find<ProfileFollowController>();
+
+  CreateUser? userData;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getFollowers();
+  }
+
+  void getFollowers() async {
+    poriflecontroller.fetchUserCount(userController.id.value);
+    GetCreateUser createExerciseVideo = GetCreateUser(token: tokenController.accessToken.value);
+    final userInfo = await createExerciseVideo.create_get();
+    setState(() {
+      userData = userInfo;
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,71 +53,88 @@ class MyPage extends StatelessWidget {
       backgroundColor: AppColor.white,
       body: SafeArea(
         child: Stack(
-          children: [
-            Column(
-              children: [
-                SetHeader(),
-            
-                //프로필
-                Expanded(
-                  child: ListView(
+                children: [
+                  Column(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: AppColor.gray50,
-                        ),
-                        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 24),
-                        child: Column(
+                      SetHeader(),
+                      Expanded(
+                        child: isLoading || userData == null
+                        ? const Center(child: CircularProgressIndicator())
+                        :  ListView(
                           children: [
-                            MemberProfile(folling: 1,follower: 12,grade: 1,image: 'assets/images/profile.png',name: '칼라피오리',),
+                            Container(
+                              decoration: BoxDecoration(color: AppColor.gray50),
+                              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+                              child: Obx(()=>MemberProfile(
+                                isMy: true,
+                                id: userController.id.value,
+                                folling: poriflecontroller.getCountData.value!.followingCount,
+                                follower: poriflecontroller.getCountData.value!.followerCount,
+                                grade: userController.grade.value,
+                                image: '${userController.profileImage.value}',
+                                name: userController.name.value,
+                              ),)
+                            ),
+                            MemberCount(
+                              calori: userController.caloriBurned.value,
+                              compleRoutine: userController.completeRoutine.value,
+                              workTime: userController.workTime.value,
+                            ),
+                            MemberSelector(),
+                            Obx(
+                              () => SizedBox(
+                                height: 400,
+                                child: memberController.isSelector.value
+                                    ? ListView(
+                                        children: userData!.routines.map((routine) {
+                                          return RutinDelete(
+                                            id: routine.id,
+                                            isEvery: true,
+                                            title: routine.name,
+                                            document: routine.description,
+                                            name: userController.name.value,
+                                            image: userController.profileImage.value ?? 'null',
+                                          );
+                                        }).toList(),
+                                      )
+                                    : ListView(
+                                        children: userData!.videos.map((video) {
+                                          return ExercisevideoDelete(
+                                            id: video.id,
+                                            // image: video.videourl ?? '',
+                                            image: 'assets/images/exer.jpg',
+                                            detail: video.title,
+                                            title: userController.name.value,
+                                          );
+                                        }).toList(),
+                                      ),
+                              ),
+                            )
                           ],
                         ),
                       ),
-                            
-                      MemberCount(),
-                            
-                      MemberSelector(),
-                            
-                      Obx(()=>SizedBox(
-                        height: 400,
-                        child: memberController.isSelector.value?ListView.builder(
-                          itemCount: 131,
-                          itemBuilder: (context, index) {
-                            return RutinDelete(isEvery: true,title: '개쩌는 등 운동 루틴',document: '등을 확실하게 조질 수 있습니다.',name: "칼라피오리",image: 'assets/images/profile.png',);
-                          },
-                        ):
-                        ListView.builder(
-                          itemCount: 30,
-                          itemBuilder: (context, index) {
-                            return ExercisevideoDelete(image: 'assets/images/profile.png', detail: '킴펨베의 운동 교실', title: '킴펨베');
-                          },
-                        ),
-                      ))
+                      Footer(isClick: 4),
                     ],
                   ),
-                ),
-                Footer(isClick: 4,)
-              ],
-            ),
-            Positioned(
-              right: 12,
-              bottom: 120,
-              child: GestureDetector(
-                onTap: (){
-                  Get.toNamed('MyManage');
-                },
-                child: Container(
-                  padding: EdgeInsets.all(11),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColor.red
-                  ),
-                  child: SvgPicture.asset('assets/icon/manage.svg'),
-                ),
+                  Positioned(
+                    right: 12,
+                    bottom: 120,
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.toNamed('AddBoard');
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(11),
+                        decoration:  BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColor.gray200,
+                        ),
+                        child: SvgPicture.asset('assets/icon/add.svg'),
+                      ),
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
       ),
     );
   }
